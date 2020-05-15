@@ -3,10 +3,11 @@
 Foobar
 
 ## Contributors and Roles
-
-1. Hogan Bobertz: API
-2. Dannah Dolorfino:   
-3. Carter Jay Hankin:  
-4. Allan McCormick:    
-5. Juan Rodriguez:     
-6. Noah Watts:     
+Name  | Role
+------------- | -------------
+Hogan Bobertz  | API
+Dannah Dolorfino  | Fill in your role
+Carter Jay Hankin  | Fill in your role
+Allan McCormick  | Fill in your role
+Juan Rodriguez  | Fill in your role
+Noah Watts  | Fill in your role    
