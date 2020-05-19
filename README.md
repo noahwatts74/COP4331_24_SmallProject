@@ -8,7 +8,7 @@ Name  | Role
 Hogan Bobertz  | API
 Dannah Dolorfino  | Front-End
 Carter Jay Hankin  | Fill in your role
-Allan McCormick  | Fill in your role
+Allan McCormick  | Project manager/front-end 
 Juan Rodriguez  | Dropped class?
 Noah Watts  | Database    
 
