@@ -5,8 +5,9 @@
 	$id = 0;
 	$firstName = "";
 	$lastName = "";
-
-	$conn = new mysqli("localhost", "ricklein_leinecker", "WeLoveCOP4331", "ricklein_COP4331");
+	//$Username = $inData["Username"];
+	//$Password = $inData["Password"];
+	$conn = new mysqli("localhost", "allanmc2_team24_1", "test1234!", "allanmc2_team24");
 	if ($conn->connect_error) 
 	{
 		returnWithError( $conn->connect_error );
