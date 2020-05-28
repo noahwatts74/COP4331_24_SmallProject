@@ -1,4 +1,4 @@
-var urlBase = 'http://COP4331-3.com/LAMPAPI';
+var urlBase = 'http://cop4331-ucf-team24.xyz/LAMPAPI';
 var extension = 'php';
 
 var userId = 0;
@@ -29,9 +29,68 @@ function doLogin()
 		xhr.send(jsonPayload);
 		
 		var jsonObject = JSON.parse( xhr.responseText );
-		
+		//alert(xhr.responseText);	
 		userId = jsonObject.id;
 		
+		if( userId < 1 )
+		{
+			document.getElementById("loginResult").innerHTML = "User/Password combination incorrect";
+			return;
+		}
+		
+		firstName = jsonObject.firstName;
+		lastName = jsonObject.lastName;
+
+		saveCookie();
+	
+		window.location.href = "color.html";
+	}
+	catch(err)
+	{
+		document.getElementById("loginResult").innerHTML = err.message;
+	}
+
+}
+
+function signup()
+{
+	userId = 0;
+	firstName = "";
+	lastName = "";
+	
+	var login = document.getElementById("loginName").value;
+	var password = document.getElementById("loginPassword").value;
+	var passwordCheck = document.getElementById("loginPassword").value;
+	if(passwordCheck != password)
+	{
+		document.getElementById("loginResult").innerHTML = "Does not match given password";
+	}
+//	var hash = md5( password );
+	
+	document.getElementById("loginResult").innerHTML = "";
+
+//	var jsonPayload = '{"login" : "' + login + '", "password" : "' + hash + '"}';
+	var jsonPayload = '{"login" : "' + login + '", "password" : "' + password + '"}';
+	var url = urlBase + '/Login.' + extension;
+
+	var xhr = new XMLHttpRequest();
+	xhr.open("POST", url, false);
+	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+	try
+	{
+		xhr.send(jsonPayload);
+		
+		var jsonObject = JSON.parse( xhr.responseText );
+		//alert(xhr.responseText);	
+		userId = jsonObject.id;
+		
+//		if userId does not equal any userId from database then good OR if userId equals a userId from database the error name already taken
+//		if( document.getElementById("loginName").value != userId )
+//		{
+//			return;
+//		} else {
+//			document.getElementById("loginResult").innerHTML = "Username already taken";
+
 		if( userId < 1 )
 		{
 			document.getElementById("loginResult").innerHTML = "User/Password combination incorrect";
