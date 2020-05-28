@@ -81,7 +81,7 @@ function signup()
 		xhr.send(jsonPayload);
 		
 		var jsonObject = JSON.parse( xhr.responseText );
-		//alert(xhr.responseText);	
+		//alert(xhr.responseText);	`
 		userId = jsonObject.id;
 		
 //		if userId does not equal any userId from database then good OR if userId equals a userId from database the error name already taken

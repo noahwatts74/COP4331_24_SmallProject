@@ -15,7 +15,7 @@ else
 
     $sql = "INSERT INTO Users(Login, Password) VALUES ('" . $inData["Login"] . "', '" . $inData["Password"] . "')";
     $conn->query($sql);
-    sendResultInfoAsJson("{\"derf\":\"derf\"}");
+    sendResultInfoAsJson($inData["Login"],$inData["Password"]);
 
 }
 
