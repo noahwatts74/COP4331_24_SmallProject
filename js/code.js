@@ -60,7 +60,7 @@ function signup()
 	
 	var login = document.getElementById("loginName").value;
 	var password = document.getElementById("loginPassword").value;
-	var passwordCheck = document.getElementById("pwdRepeat").value;
+	var passwordCheck = document.getElementById("loginPassword").value;
 	if(passwordCheck != password)
 	{
 		document.getElementById("loginResult").innerHTML = "Does not match given password";
@@ -70,8 +70,8 @@ function signup()
 	document.getElementById("loginResult").innerHTML = "";
 
 //	var jsonPayload = '{"login" : "' + login + '", "password" : "' + hash + '"}';
-	var jsonPayload = '{"Login" : "' + login + '", "Password" : "' + password + '"}';
-	var url = urlBase + '/Register.' + extension;
+	var jsonPayload = '{"login" : "' + login + '", "password" : "' + password + '"}';
+	var url = urlBase + '/Login.' + extension;
 
 	var xhr = new XMLHttpRequest();
 	xhr.open("POST", url, false);
@@ -81,7 +81,7 @@ function signup()
 		xhr.send(jsonPayload);
 		
 		var jsonObject = JSON.parse( xhr.responseText );
-		//alert(xhr.responseText);	`
+		//alert(xhr.responseText);	
 		userId = jsonObject.id;
 		
 //		if userId does not equal any userId from database then good OR if userId equals a userId from database the error name already taken
