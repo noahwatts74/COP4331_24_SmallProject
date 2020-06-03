@@ -106,6 +106,7 @@ function signup()
 		
 		firstName = jsonObject.firstName;
 		lastName = jsonObject.lastName;
+		document.cookie = Login;
 		saveCookie();
 	
 		window.location.href = "index.html";
