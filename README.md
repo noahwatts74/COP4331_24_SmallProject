@@ -31,4 +31,4 @@ FYI 2: The date variable type is formatted yyyy-mm-dd make sure to use the dashe
 Table | Field 1 | Field 2 | Field 3 | Field 4 | Field 5 | Field 6 | Field 7 
 ------------- | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- | -------------
 Users | ID - auto incrementing int | FirstName - varchar | LastName - varchar | Login - varchar | Password - varchar | none | none
-Contacts | ID - auto incrementing int | FirstName - varchar | LastName - varchar | Phone - varchar | Email - varchar| Date - date | UserID - int ID from the Users table
+Contacts | ID - auto incrementing int | FirstName - varchar | LastName - varchar | Phone - varchar | Email - varchar| Date - date | ParentLogin - associated user login from the users table
