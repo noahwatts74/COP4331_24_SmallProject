@@ -14,9 +14,12 @@
 	} 
 	else
 	{
-		$sql = "DELETE FROM Users WHERE Login='" . $inData["Login"] . "'";
+		$sql2 = "SELECT Login FROM Users WHERE Login='" . $inData["Login"] . "'";
+    	$result2 = $conn->query($sql2);
 		
-		if($conn->query($sql) == TRUE) {
+		if($result2->num_rows > 0) {
+			$sql = "DELETE FROM Users WHERE Login='" . $inData["Login"] . "'";
+			$conn->query($sql);
 			returnWithInfo($inData["Login"]);
 		} else {
 			returnWithError($inData["Login"]);
@@ -36,9 +39,9 @@
 		echo $obj;
 	}
 	
-	function returnWithError($Id, $err )
+	function returnWithError($Id)
 	{
-		$retValue = '{"id":' . $id . ',"deleted":"False","error":"Selected User could not be deleted"}';
+		$retValue = '{"id":' . $id . ',"deleted":"False","error":"User does not exist"}';
 		sendResultInfoAsJson( $retValue );
 	}
 	
