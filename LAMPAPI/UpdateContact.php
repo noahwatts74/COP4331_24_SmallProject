@@ -1,10 +1,13 @@
 <?php
 
 $inData = getRequestInfo();
-	
-$id = 0;
-$firstName = "";
-$lastName = "";
+    
+
+// get global variables and change them if the new exists
+$firstName = $inData["OriginalFirstName"];
+$lastName = $inData["OriginalLastName"];
+$phone = $inData["OriginalPhone"];
+$email = "";
 $conn = new mysqli("localhost", "allanmc2_team24_1", "test1234!", "allanmc2_team24");
 if ($conn->connect_error) 
 {
@@ -18,6 +21,9 @@ else
             LastName='" . $inData["OriginalLastName"] . "' AND
             Phone='" . $inData["OriginalPhone"] . "'";
     $result = $conn->query($sql);
+    global $email;
+    $row = $result->fetch_assoc();
+    $email = $row["Email"];
     if ($result->num_rows == 0)
 	{
 		// Return error because this input from the user is already associated
@@ -26,22 +32,37 @@ else
 		returnWithError($error);
     }
     else {
+        if(!empty($inData["NewFirstName"])){
+            global $firstName;
+            $firstName = $inData["NewFirstName"];
+        }
+        if(!empty($inData["NewLastName"])){
+            global $lastName;
+            $lastName = $inData["NewLastName"];
+        }
+        if(!empty($inData["NewPhone"])){
+            global $phone;
+            $phone = $inData["NewPhone"];
+        }
+        if(!empty($inData["NewEmail"])){
+            global $email;
+            $email = $inData["NewEmail"];
+        }
         $new = "UPDATE Contacts SET 
-        FirstName='" . $inData["NewFirstName"] . "',
-        LastName='" . $inData["NewLastName"] . "', 
-        Phone='" . $inData["NewPhone"] . "',
-        Email='" . $inData["NewEmail"] . "'
+        FirstName='" . $firstName . "',
+        LastName='" . $lastName . "',
+        Phone='" . $phone . "',
+        Email='" . $email . "'
         WHERE
         FirstName='" . $inData["OriginalFirstName"] . "' AND
         LastName='" . $inData["OriginalLastName"] . "' AND
         Phone='" . $inData["OriginalPhone"] . "'";
         $conn->query($new);
-
         $UpdatedContact = "SELECT FirstName, LastName, ParentLogin, Phone, Email FROM Contacts WHERE 
         ParentLogin='" . $inData["ParentLogin"] . "' AND
-        FirstName='" . $inData["NewFirstName"] . "' AND
-        LastName='" . $inData["NewLastName"] . "' AND
-        Phone='" . $inData["NewPhone"] . "'";
+        FirstName='" . $firstName . "' AND
+        LastName='" . $lastName . "' AND
+        Phone='" . $phone . "'";
         $result = $conn->query($UpdatedContact);
         
         $row = $result->fetch_assoc();
