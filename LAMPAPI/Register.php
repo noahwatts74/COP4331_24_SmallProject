@@ -12,14 +12,14 @@ if ($conn->connect_error)
 } 
 else
 {   
-    $sql = "SELECT ID FROM Users where Login='" . $inData["Login"] . "'";
+    $sql = "SELECT Login FROM Users WHERE Login='" . $inData["Login"] . "'";
     $result = $conn->query($sql);
     if ($result->num_rows > 0)
 	{
 		// Return error because this input from the user is already associated
 		// with another account
 		$error = '{"id":0,"FirstName":"","LastName":"","error":"This account already Exists"}';
-		returnWithErrorForUser($error);
+		returnWithError($error);
 	}
     else {
         $new = "INSERT INTO Users(FirstName, LastName, Login, Password) VALUES ('" . $inData["FirstName"] . "', '" . $inData["LastName"] . "', '". $inData["Login"] . "', '" . $inData["Password"] . "')";
