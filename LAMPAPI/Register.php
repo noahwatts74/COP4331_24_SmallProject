@@ -18,7 +18,7 @@ else
 	{
 		// Return error because this input from the user is already associated
 		// with another account
-		$error = '{"id":0,"FirstName":"","LastName":"","error":"This account already Exists"}';
+		$error = "This account already Exists";
 		returnWithError($error);
 	}
     else {
@@ -49,13 +49,13 @@ function sendResultInfoAsJson( $obj )
 
 function returnWithError( $err )
 {
-	$retValue = '{"id":0,"firstName":"","lastName":"","error":"' . $err . '"}';
+	$retValue = '{"Login":0,"FirstName":"","LastName":"","error":"' . $err . '"}';
 	sendResultInfoAsJson( $retValue );
 }
 
 function returnWithInfo( $firstName, $lastName, $id )
 {
-	$retValue = '{"id":' . $id . ',"firstName":"' . $firstName . '","lastName":"' . $lastName . '","error":""}';
+	$retValue = '{"Login":"' . $id . '","FirstName":"' . $firstName . '","LastName":"' . $lastName . '","error":""}';
 	sendResultInfoAsJson( $retValue );
 }
 

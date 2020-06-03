@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+<<<<<<< HEAD
        <link href="static/css/styles.css" rel="stylesheet">	
     	<link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
         <title>Sign up!</title>
@@ -9,6 +10,93 @@
     <body>
         <a href="index.html">Back to Login</a>
         <h1>Sign up Page</h1>
+=======
+
+		<!--Bootstrap CSS link-->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+		<!--Bootstrap JS files-->
+		<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+		<!--JS files-->
+		<!-- <script type="text/javascript" src="js/md5.js"></script> -->
+		<script type="text/javascript" src="js/code.js"></script>
+
+		<!--Custom CSS-->
+		<link href="css/styles.css" rel="stylesheet">	
+		<link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+        <title>Register!</title>
+    </head>
+
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <h1 class="display-4 bg-light p-2">Register your <strong>Pok&eacute;dex!</strong></h1>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Login</a>
+                    </li>
+        
+                    <li class="nav-item active">
+                        <a class="nav-link bg-light" href="#">Register<span class="sr-only">(current)</span></a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        
+        <!--Signup box-->
+        <div class="container">
+            <div class="row">
+            <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+                <div class="card card-signin my-5">
+                <div class="card-body">
+                    <h6 class="card-title text-center">Please fill out the following form to make your account!</h6>
+                    <form class="form-signin">
+                    
+                    <div class="form-label-group">
+                        <input type="text" id="firstName" class="form-control" placeholder="First Name" required autofocus>
+                        <label for="firstName">First Name</label>
+                    </div>
+
+                    <div class="form-label-group">
+                        <input type="text" id="lastName" class="form-control" placeholder="Last Name" required autofocus>
+                        <label for="lastName">Last Name</label>
+                    </div>
+
+                    <div class="form-label-group">
+                        <input type="text" id="loginName" class="form-control" placeholder="Username" required autofocus>
+                        <label for="loginName">Username</label>
+                    </div>
+        
+                    <div class="form-label-group">
+                        <input type="password" id="loginPassword" class="form-control" placeholder="Password" required>
+                        <label for="loginPassword">Password</label>
+                    </div>
+
+                    <div class="form-label-group">
+                        <input type="password" id="pwdRepeat" class="form-control" placeholder="PasswordRepeat" required>
+                        <label for="pwdRepeat">Verify password</label>
+                    </div>
+                    </form>
+
+                    <hr class="my-4">
+                    <button onclick="signup();" class="btn btn-lg btn-primary btn-block text-uppercase" id="signupButton" >Create Pok&eacute;dex!</button>
+                    <span class="text-center" id="loginResult"></span>
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
+
+        <!-- Pikachu image -->
+        <div id="pika">
+            <img src="css/images/just_pika.png" width="350px">
+        </div>
+
+        <!--
+>>>>>>> 82050b261fc278cbfd5dd620e99e24050c21803e
         <div class="signup-form">
             <p>Please fill out the following form to create a new account:</p>
             <hr>
@@ -21,9 +109,18 @@
 
                 <label for="pwdRepeat">Verify Password:</label>
                 <input type="password" id="pwdRepeat" placeholder="Verify your password"/> <br />
+<<<<<<< HEAD
     
                 <button type="button" id="loginButton" class="buttons" onclick="">Sign up</button>
             </form>
         </div>
+=======
+            </form>
+
+            <button type="button" id="loginButton" class="buttons" onclick="signup();">Sign up</button>
+        </div>
+        <span id="loginResult"></span>
+    -->
+>>>>>>> 82050b261fc278cbfd5dd620e99e24050c21803e
     </body>
 </html>

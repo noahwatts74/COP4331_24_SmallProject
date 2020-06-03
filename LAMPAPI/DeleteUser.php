@@ -24,7 +24,6 @@
 		} else {
 			returnWithError($inData["Login"]);
 		}		
-
 		$conn->close();
 	}
 	

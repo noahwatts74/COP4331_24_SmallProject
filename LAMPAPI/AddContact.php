@@ -24,11 +24,11 @@ else
 	{
 		// Return error because this input from the user is already associated
 		// with another account
-		$error = '{"ParentLogin":0,"Phone":"",FirstName":"","LastName":"","error":"This Contact already exists"}';
+		$error = "This Contact already exists";
 		returnWithError($error);
     }
     elseif($result2->num_rows == 0){
-        $error = '{"ParentLogin":0,"Phone":"",FirstName":"","LastName":"","error":"The associated user does not exist"}';
+        $error = "The associated user does not exist";
 		returnWithError($error);
     }
     else {
@@ -70,7 +70,7 @@ function sendResultInfoAsJson( $obj )
 
 function returnWithError( $err )
 {
-	$retValue = '{"id":0,"firstName":"","lastName":"","error":"' . $err . '"}';
+	$retValue = '{"ParentLogin":0,"Phone":"",FirstName":"","LastName":"","error":"'. $err . '"}';
 	sendResultInfoAsJson( $retValue );
 }
 
