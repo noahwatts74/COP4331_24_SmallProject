@@ -12,43 +12,19 @@
     } 
     else
     {   
-        $sql = "SELECT FirstName, LastName, Phone, Email, Date, ParentLogin FROM Contacts WHERE 
+        $sql = "SELECT ParentLogin, FirstName, LastName, Phone, Email, Date FROM Contacts WHERE 
                 ParentLogin='" . $inData["ParentLogin"] . "'";
-        $result = $conn->query($sql);
-        $rows = array();
-        // while ( $row = $result->fetch_assoc())  {
-        //     echo($row);
-        //   }
-        //  echo json_encode($rows);
-        $row = result->fetch_row();
-        $firstName = $row["FirstName"];
-        echo($firstName);
-        // while ($row = $result->fetch_row()) {
-        //     // $firstName = $row["FirstName"];
-        //     // $lastName = $row["LastName"];
-        //     // $ParentLogin = $row["ParentLogin"];
-        //     // $Email = $row["Email"];
-        //     // $Date = $row["Date"];
-        //     // $Phone = $row["Phone"];
-        //     // echo($firstName);
-        // //     $tempObj = new stdClass;
-        // //     $tempObj->FirstName = $firstName;
-        // //     $tempObj->LastName = $LastName;
-        // //     $tempObj->ParentLogin = $ParentLogin;
-        // //     $tempObj->Email = $Email;
-        // //     $tempObj->Date = $Date;
-        // //     $tempObj->Phone = $Phone;
-        // //     echo "derf";
-        // //     $rows[$index] = $tempObj;
-        // //     // $tempArr = array('FirstName' => $firstName,
-        // //     //                 'LastName' => $LastName,
-        // //     //                 'ParentLogin' => $ParentLogin,
-        // //     //                 'Email' => $Email,
-        // //     //                 'Date' => $Date,
-        // //     //                 'Phone' => $Phone)
-        // //     $index++;
-        // //     // returnWithInfo($firstName, $lastName, $Phone, $Date, $Email, $ParentLogin)
-        // }
+        $result = mysqli_query($conn, $sql);
+        if($result->num_rows == 0){
+            returnWithError("No Contacts Found");
+        }
+        else{
+            while($row = mysqli_fetch_assoc($result)){
+                $row->error = "";
+                $test[] = $row;
+            } 
+            echo json_encode($test);
+        }
     }
 
     function getRequestInfo()
@@ -65,7 +41,7 @@
 
     function returnWithError( $err )
     {
-        $retValue = '{"id":0,"firstName":"","lastName":"","error":"' . $err . '"}';
+        $retValue = '{"ParentLogin":"0","firstName":"","lastName":"","Phone":"","Email":"","Date":"","error":"' . $err . '"}';
         sendResultInfoAsJson( $retValue );
     }
 

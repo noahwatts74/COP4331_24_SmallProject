@@ -37,7 +37,7 @@ else
         '" . $inData["LastName"] . "', 
         '" . $inData["Phone"] . "',
         '" . $inData["Email"] . "',
-        '" . date("y/m/d h:i:s") . "',
+        '" . date("y-m-d h:i:s") . "',
         '" . $inData["ParentLogin"] . "')";
         $conn->query($new);
         $newContact = "SELECT FirstName, LastName, ParentLogin, Phone, Date FROM Contacts WHERE 
