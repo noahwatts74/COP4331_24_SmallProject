@@ -233,11 +233,8 @@ function getContacts()
 					contactList += `<tr id="row${i}"> <td id="firstname${i}" scope="col"> ${jsonObject[i]["FirstName"]}</td>`;
 					contactList += `<td id="lastname${i}" scope="col"> ${jsonObject[i]["LastName"]}</td>`;
 					contactList += `<td id="phone${i}" scope="col"> ${jsonObject[i]["Phone"]}</td>`;
-					contactList += `<td id="email${i}" scope="col"> ${jsonObject[i]["Email"]}</td></tr>`;
-					// <button class="btn btn-lg btn-primary btn-block text-uppercase" onclick="addContact();">Add new contact</button>
-					//contactList += `<td id="actions${i}" scope="col"><button type="button" class="btn btn-sm btn-primary">Edit</button><button type="button" class="btn btn-sm btn-danger" >onclick="deleteContact();Delete</button></td></tr><span id="contactAddResult"></span>`;
-					//contactDeleteResult
-					//contactList += `<td id="actions${i}" scope="col"><button type="button" class="btn btn-sm btn-primary">Edit</button><button type="button" class="btn btn-sm btn-danger">Delete</button></td></tr>`;
+					contactList += `<td id="email${i}" scope="col"> ${jsonObject[i]["Email"]}</td>`;
+					contactList += `<td id="check" scope="col"><input class="form-check-input" type="radio" name="selector" id="radio-${i}" value="${1}"></tr>`;
 				}
 				
 				document.getElementsByTagName("tbody")[0].innerHTML = contactList;
@@ -251,6 +248,7 @@ function getContacts()
 	}
 	
 }
+
 function deleteContact()
 {
 	var Parent = document.cookie.split(';')[0];
@@ -290,13 +288,14 @@ function editContact()
 	//var userId = document.cookie.readCookie().userId;
 	//document.getElementById("userName").innerHTML = "Logged in as " + userId;
 	var Parent = document.cookie.split(';')[0];
+	var radioValue = document.querySelector('input[name="selector"]:checked').value;
 	var NewPhone = document.getElementById("newPhone").value;
 	var NewEmail = document.getElementById("newEmail").value;
 	var NewFirstName = document.getElementById("newFirstName").value;
 	var NewLastName = document.getElementById("newLastName").value;
-	var OriginalFirstName = document.getElementById("oldFirstName").value;
-	var OriginalLastName = document.getElementById("oldLastName").value;
-	var OriginalPhone = document.getElementById("oldPhone").value;
+	var OriginalFirstName = document.getElementById("firstname" + radioValue).value;
+	var OriginalLastName = document.getElementById("lastname" + radioValue).value;
+	var OriginalPhone = document.getElementById("phone" + radioValue).value;
 	//var parentLogin=parent;
 	document.getElementById("contactAddResult").innerHTML = "";
 	var jsonPayload = '{"ParentLogin" : "' + Parent + '", "OriginalPhone" : "' + OriginalPhone + '", "OriginalFirstName" : "' + OriginalFirstName + '", "OriginalLastName" : "' + OriginalLastName + '", "NewEmail" : "' + NewEmail + '", "NewFirstName" : "' + NewFirstName + '", "NewLastName" : "' + NewLastName + '", "NewPhone" : "' + NewPhone + '"}';
