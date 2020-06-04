@@ -10,11 +10,6 @@ Allan McCormick  | project manager/front-end
 Juan Rodriguez  | Dropped class?
 Noah Watts  | Database    
 
-
-## foobar
-
-asdfasdfasdf
-
 ## Database Info
  Login | Info
 ------------- | -------------
