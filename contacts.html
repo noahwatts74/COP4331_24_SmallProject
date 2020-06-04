@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <script type="text/javascript" src="js/code.js"></script>
+  <title>Your Pokedex</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="css/simple-sidebar.css" rel="stylesheet">
+  <script type="text/javascript">
+  document.addEventListener('DOMContentLoaded', function() 
+  {
+    readCookie();
+    getContacts();
+  }, false);
+  </script>
+
+</head>
+
+<body>
+  <!-- <div id="loggedInDiv">
+    <span id="userName"></span><br />
+    <button type="button" id="logoutButton" class="buttons" onclick="doLogout();"> Log Out </button>
+  </div> -->
+  
+  <div class="d-flex" id="wrapper">
+
+    <!-- Sidebar -->
+    <div class="bg-light border-right" id="sidebar-wrapper">
+      <div class="sidebar-heading">User's Pokedex </div>
+      <div class="list-group list-group-flush">
+        <a href="#" class="list-group-item list-group-item-action bg-light" data-toggle="modal" data-target="#addModal">Add New Contact</a>
+        <a href="#" class="list-group-item list-group-item-action bg-light" data-toggle="modal" data-target="#deleteModal">Delete Contact</a>
+        <a href="#" class="list-group-item list-group-item-action bg-light" data-toggle="modal" data-target="#editModal">Edit Contact</a>
+        <a href="#" class="list-group-item list-group-item-action bg-light" data-toggle="modal" data-target="#searchModal">Search for Contact</a>
+        <a href="#" class="list-group-item list-group-item-action bg-light" onclick="doLogout();">Log Out</a>
+      </div>
+    </div>
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Modal for Add Contact -->
+    <div class="modal fade" id="addModal" role="dialog">
+      <div class="modal-dialog">
+        <div class="card text-white bg-light mb-3">
+          <div class="modal-content">
+            <div class="modal-header">
+              <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+              <h4 class="modal-title">Add a new contact...</h4>
+            </div>
+
+            <div class="modal-body">
+              <form class="form-add">
+                <div class="form-label-group">
+                  <input type="text" id="firstName" class="form-control"  placeholder="First Name" required autofocus>
+                  <label for="email">First name:</label>
+                </div>
+    
+                <div class="form-label-group">
+                    <input type="text" id="lastName" class="form-control"  placeholder="Last Name" required autofocus>
+                    <label for="lastName">Last name:</label>
+                  </div>
+    
+                <div class="form-label-group">
+                    <input type="text" id="phone" class="form-control"  placeholder="Phone Number" required autofocus>
+                    <label for="phone">Phone number:</label>
+                </div>
+    
+                <div class="form-label-group">
+                    <input type="text" id="email" class="form-control"  placeholder="Email" required autofocus>
+                    <label for="email">Email:</label>
+                </div>
+    
+                <button class="btn btn-lg btn-primary btn-block text-uppercase" onclick="addContact();">Add new contact</button>
+                
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal for Delete Contact -->
+    <div class="modal fade" id="deleteModal" role="dialog">
+      <div class="modal-dialog">
+        <div class="card text-white bg-light mb-3">
+          <div class="modal-content">
+            <div class="modal-header">
+              <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+              <h4 class="modal-title">Delete contact...</h4>
+            </div>
+   
+            <div class="modal-body">
+              <form class="form-add">
+                <div class="form-label-group">
+                  <input type="text" id="deleteFirstName" class="form-control"  placeholder="First Name" required autofocus>
+                  <label for="deleteFirstName">First name:</label>
+                </div>
+    
+                <div class="form-label-group">
+                    <input type="text" id="deleteLastName" class="form-control"  placeholder="Last Name" required autofocus>
+                    <label for="deleteLastName">Last name:</label>
+                  </div>
+    
+                <div class="form-label-group">
+                    <input type="text" id="deletePhone" class="form-control"  placeholder="Phone Number" required autofocus>
+                    <label for="deletePhone">Phone number:</label>
+                </div>
+    
+                <button class="btn btn-lg btn-primary btn-block text-uppercase" onclick="deleteContact();">Delete Contact</button>
+                
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal for Edit Contact -->
+    <div class="modal fade" id="editModal" role="dialog">
+      <div class="modal-dialog">
+        <div class="card text-white bg-light mb-3">
+          <div class="modal-content">
+            <div class="modal-header">
+              <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+              <h4 class="modal-title">Edit contact...</h4>
+            </div>
+
+            <div class="modal-body">
+              <form class="form-add">
+                <form class="form-add">
+                  <div class="form-label-group">
+                    <input type="text" id="newFirstName" class="form-control"  placeholder="New First Name">
+                    <label for="newFirstName">New First name:</label>
+                  </div>
+      
+                  <div class="form-label-group">
+                      <input type="text" id="newLastName" class="form-control"  placeholder="New Last Name">
+                      <label for="newLastName">New Last name:</label>
+                  </div>
+      
+                  <div class="form-label-group">
+                      <input type="text" id="newPhone" class="form-control"  placeholder="New Phone Number">
+                      <label for="newPhone">New Phone number:</label>
+                  </div>
+      
+                  <div class="form-label-group">
+                      <input type="text" id="newEmail" class="form-control"  placeholder="New Email">
+                      <label for="newEmail">New Email:</label>
+                  </div>
+    
+                <button class="btn btn-lg btn-primary btn-block text-uppercase" class="close" onclick="editContact();">Edit contact</button>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal for Search Contact -->
+    <div class="modal fade" id="searchModal" role="dialog">
+      <div class="modal-dialog">
+        <div class="card text-white bg-light mb-3">
+          <div class="modal-content">
+            <div class="modal-header">
+              <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+              <h4 class="modal-title">Search for contact...</h4>
+            </div>
+
+            <div class="modal-body">
+              <form class="form-add">
+                <div class="form-label-group">
+                  <input type="text" id="searchText" class="form-control"  placeholder="Search" required autofocus>
+                  <label for="searchText">Search through contacts...</label>
+                </div>
+    
+                <button class="btn btn-lg btn-primary btn-block text-uppercase" data-dismiss="modal" onclick="searchContacts();">Search for Contact</button>
+                
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+
+      <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+        <button class="btn btn-primary" id="menu-toggle">Toggle Menu</button>
+
+        <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button> -->
+
+        <!-- <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Dropdown
+              </a>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Something else here</a>
+              </div>
+            </li>
+          </ul>
+        </div> -->
+      </nav>
+
+      <!-- Contact List content -->
+      <div class="container-fluid">
+        <h1 class="mt-4">Contact List</h1>
+        
+        <div id="accessUIDiv">
+          <br />
+          <span id="contactSearchResult"></span>
+          <span id="contactEditResult"></span>
+          <span id="contactDeleteResult"></span>
+          <span id="contactAddResult"></span>
+          <p id="contactList">
+          </p><br /><br />
+          <button type="button" class="btn btn-default" onclick="getContacts();">Refresh Contacts</button>
+        </div>
+
+        <!-- Table  -->
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">First Name</th>
+              <th scope="col">Last Name</th>
+              <th scope="col">Phone</th>
+              <th scope="col">Email</th>
+              
+            </tr>
+            
+          </thead>
+          <tbody>
+
+            <p id="contactList"></p>
+
+          </tbody>
+        </table>
+        
+      </div>
+    </div>
+    <!-- /#page-content-wrapper -->
+
+  </div>
+  <!-- /#wrapper -->
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Menu Toggle Script -->
+  <script>
+    $("#menu-toggle").click(function(e) {
+      e.preventDefault();
+      $("#wrapper").toggleClass("toggled");
+    });
+  </script>
+
+</body>
+
+</html>

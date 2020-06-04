@@ -166,6 +166,7 @@ function doLogout()
 	firstName = "";
 	lastName = "";
 	document.cookie = "firstName= ; expires = Thu, 01 Jan 1970 00:00:00 GMT";
+	document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
 	window.location.href = "index.html";
 }
 
@@ -230,11 +231,11 @@ function getContacts()
 				
 				for( var i=0; i<jsonObject.length; i++ )
 				{
-					contactList += `<tr id="row${i}"> <td id="firstname${i}" scope="col"> ${jsonObject[i]["FirstName"]}</td>`;
-					contactList += `<td id="lastname${i}" scope="col"> ${jsonObject[i]["LastName"]}</td>`;
-					contactList += `<td id="phone${i}" scope="col"> ${jsonObject[i]["Phone"]}</td>`;
-					contactList += `<td id="email${i}" scope="col"> ${jsonObject[i]["Email"]}</td>`;
-					contactList += `<td id="check" scope="col"><input class="form-check-input" type="radio" name="selector" id="radio-${i}" value="${1}"></tr>`;
+					contactList += `<tr id="row${i}"> <td id="firstname${i}" scope="col">${jsonObject[i]["FirstName"]}</td>`;
+					contactList += `<td id="lastname${i}" scope="col">${jsonObject[i]["LastName"]}</td>`;
+					contactList += `<td id="phone${i}" scope="col">${jsonObject[i]["Phone"]}</td>`;
+					contactList += `<td id="email${i}" scope="col">${jsonObject[i]["Email"]}</td>`;	
+					contactList += `<td id="check" scope="col"><input class="form-check-input" type="radio" name="selector" id="radio-${i}" value="${i}"></tr>`;
 				}
 				
 				document.getElementsByTagName("tbody")[0].innerHTML = contactList;
@@ -252,9 +253,10 @@ function getContacts()
 function deleteContact()
 {
 	var Parent = document.cookie.split(';')[0];
-	var FirstName = document.getElementById("deleteFirstName").value;
-	var LastName = document.getElementById("deleteLastName").value;
-	var Phone = document.getElementById("deletePhone").value;
+	var radioValue = document.querySelector('input[name="selector"]:checked').value;
+	var FirstName = document.getElementById("firstname" + radioValue).innerHTML;
+	var LastName = document.getElementById("lastname" + radioValue).innerHTML;
+	var Phone = document.getElementById("phone" + radioValue).innerHTML;
 	
 	document.getElementById("contactDeleteResult").innerHTML = "";
 	var jsonPayload = '{"ParentLogin" : "' + Parent + '", "Phone" : "' + Phone + '", "FirstName" : "' + FirstName + '", "LastName" : "' + LastName + '"}';
@@ -293,14 +295,16 @@ function editContact()
 	var NewEmail = document.getElementById("newEmail").value;
 	var NewFirstName = document.getElementById("newFirstName").value;
 	var NewLastName = document.getElementById("newLastName").value;
-	var OriginalFirstName = document.getElementById("firstname" + radioValue).value;
-	var OriginalLastName = document.getElementById("lastname" + radioValue).value;
-	var OriginalPhone = document.getElementById("phone" + radioValue).value;
+	var OriginalFirstName = document.getElementById("firstname" + radioValue).innerHTML;
+	var OriginalLastName = document.getElementById("lastname" + radioValue).innerHTML;
+	var OriginalPhone = document.getElementById("phone" + radioValue).innerHTML;
+
+	if(radioValue == null) location.reload();
 	//var parentLogin=parent;
 	document.getElementById("contactAddResult").innerHTML = "";
 	var jsonPayload = '{"ParentLogin" : "' + Parent + '", "OriginalPhone" : "' + OriginalPhone + '", "OriginalFirstName" : "' + OriginalFirstName + '", "OriginalLastName" : "' + OriginalLastName + '", "NewEmail" : "' + NewEmail + '", "NewFirstName" : "' + NewFirstName + '", "NewLastName" : "' + NewLastName + '", "NewPhone" : "' + NewPhone + '"}';
 	//var jsonPayload = '{"ParentLogin" : "' + ParentLogin + '", "Phone" : ' + Phone + '}';
-	var url = urlBase + '/UpdateUser.' + extension;
+	var url = urlBase + '/UpdateContact.' + extension;
 	
 	var xhr = new XMLHttpRequest();
 	xhr.open("POST", url, true);
@@ -320,5 +324,48 @@ function editContact()
 	{
 		document.getElementById("contactEditResult").innerHTML = err.message;
 	}
-	
+	location.reload();
+}
+
+function searchContacts()
+{
+    var Parent = document.cookie.split(';')[0];
+    var search = document.getElementById("searchText").value;
+    var contactList = "";
+    
+    var jsonPayload = '{"LastName" : "' + search + '","ParentLogin" : "' + Parent + '"}';
+    var url = urlBase + '/SearchContacts.' + extension;
+    //var parentLogin
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+    
+    try
+	{
+		xhr.onreadystatechange = function() 
+		{
+			if (this.readyState == 4 && this.status == 200) 
+			{
+				//alert(xhr.responseText);
+				var jsonObject = JSON.parse( xhr.responseText );
+				
+				for( var i=0; i<jsonObject.length; i++ )
+				{
+					contactList += `<tr id="row${i}"> <td id="firstname${i}" scope="col">${jsonObject[i]["FirstName"]}</td>`;
+					contactList += `<td id="lastname${i}" scope="col">${jsonObject[i]["LastName"]}</td>`;
+					contactList += `<td id="phone${i}" scope="col">${jsonObject[i]["Phone"]}</td>`;
+					contactList += `<td id="email${i}" scope="col">${jsonObject[i]["Email"]}</td>`;
+					contactList += `<td id="check" scope="col"><input class="form-check-input" type="radio" name="selector" id="radio-${i}" value="${1}"></tr>`;
+				}
+				
+				document.getElementsByTagName("tbody")[0].innerHTML = contactList;
+			}
+		};
+		xhr.send(jsonPayload);
+	}
+	catch(err)
+	{
+		document.getElementById("contactSearchResult").innerHTML = err.message;
+	}
+    
 }
