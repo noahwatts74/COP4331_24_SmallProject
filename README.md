@@ -1,7 +1,5 @@
 # COP4331 Small Project (LAMP)
 
-Foobar
-
 ## Contributors and Roles
 Name  | Role
 ------------- | -------------
