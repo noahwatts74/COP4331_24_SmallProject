@@ -5,9 +5,9 @@ Foobar
 ## Contributors and Roles
 Name  | Role
 ------------- | -------------
-Hogan Bobertz  | API
+Hogan Bobertz  | API/Front-End
 Dannah Dolorfino  | Front-End
-Carter Jay Hankin  | Fill in your role
+Carter Jay Hankin  | API/Front-End
 Allan McCormick  | project manager/front-end
 Juan Rodriguez  | Dropped class?
 Noah Watts  | Database    
